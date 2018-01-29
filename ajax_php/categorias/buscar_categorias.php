@@ -30,7 +30,7 @@ if (isset($_GET['id']))
                 {
                     $sWhere.= "and nombre_categoria Like '%$nombre_categoria%'";
                 }
-     $sWhere.= "and Ruc = '".$_SESSION['Ruc']."'";
+            $sWhere.= "and Ruc = '".$_SESSION['Ruc']."'";
             $sWhere.= ' order by nombre_categoria';
             include '../pagination.php'; 
             $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) ?$_REQUEST['page']:1;
@@ -47,7 +47,8 @@ if (isset($_GET['id']))
             if ($numrows > 0){
 ?>
                 <div class='table-responsive'>
-                <table class='table'>
+                <table id ="tabla_prueba" class='table'>
+                <thead>
                 <tr class='btn-info'>
                     <th>Id categoría</th>
                     <th>Nombre</th>
@@ -55,6 +56,7 @@ if (isset($_GET['id']))
                     <th>Fecha</th>
                     <th class='text-right'>Acciones</th>
                 </tr>
+            </thead>
 <?php
                     while ($row=mysqli_fetch_array($query)){
 ?>
