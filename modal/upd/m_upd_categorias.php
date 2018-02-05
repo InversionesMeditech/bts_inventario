@@ -11,6 +11,7 @@ if (isset($con)){?>
                     <form class='form-horizontal' method='post' id='actualizar_categorias' name='actualizar_categorias'>
                         <div id = 'resultados_ajax2' ></div>
                         <input type = 'hidden' name = 'upd_id' id = 'upd_id' >
+                        <input type="hidden" id='action' name='action' value='upd'>
                             <div class='form-group'>
                             <label for='upd_nombre_categoria' class='col-sm-3 control-label'>Nombre</label>
                             <div class='col-sm-8'>

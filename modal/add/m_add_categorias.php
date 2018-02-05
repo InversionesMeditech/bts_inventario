@@ -9,6 +9,7 @@ if (isset($con)){?>
           </div>
           <div class='modal-body'>
                     <form class='form-horizontal' method='post' id='guardar_categorias' name='guardar_categorias'>
+                        <input type ='hidden' id = 'action' name = 'action' value = 'add'>
                         <div id = 'resultados_ajax' ></div>
                             <div class='form-group'>
                             <label for='add_nombre_categoria' class='col-sm-3 control-label'>Nombre</label>

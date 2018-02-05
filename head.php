@@ -20,6 +20,10 @@
 	<link rel=icon href='img/logo-icon.png' sizes="32x32" type="image/png">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+   <!--Data table -->
+     <!--CSS-->    
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+ 
 
 	<script>
 		( function ( i, s, o, g, r, a, m ) {

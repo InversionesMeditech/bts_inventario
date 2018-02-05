@@ -13,7 +13,7 @@
 </div>
 <!-- ./wrapper -->
 <script src="js/jquery.min.js"></script>
-<script src="js/jquery-1.12.3.js"></script>
+<script src="js/jquery-1.10.2.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -33,6 +33,10 @@
 <script src="js/fastclick.js"></script>
 <script src="js/adminlte.min.js"></script>
 <script src="js/demo.js"></script>
+<!--Data table-->
+    <!--Javascript-->    
+   <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>          
 </body>
 </html>
    

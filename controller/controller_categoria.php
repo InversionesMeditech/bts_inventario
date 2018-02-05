@@ -1,58 +1,76 @@
 <?php
-//Llamada al modelo
 require_once('../models/model_categoria.php');
-include 'pagination.php'; 
-$categorias=new model_categoria();
+require_once('../libraries/mensajes.php');
+$categorias = new model_categoria();
+$mensaje = new mensajes();
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL)?$_REQUEST['action']:'';
-
-if ($action == 'buscar')
+if ($action == "b")
 {
-    $nombre_categoria = $_REQUEST['nombre_categoria'];
-    $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) ?$_REQUEST['page']:1;
-    $per_page = 2; 
-    $adjacents = 4;
-    $reload = '../../categorias.php'; 
-    $offset = ($page - 1) * $per_page;
-    $datos=$categorias->get_categorias($offset,$per_page,$nombre_categoria);
-    $total_rows = $categorias->get_total_categorias();
-    $numrows = count($total_rows);
-    $total_pages = ceil($numrows /$per_page);
-?>    
-    <div class='table-responsive'>
-        <table id ="tabla_prueba" class='table'>
-        <thead>
-            <tr class='btn-info'>
-                <th>Id categoría</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Fecha</th>
-                <th class='text-right'>Acciones</th>
-            </tr>
-        </thead>
-<?php
-    foreach ($datos as $dato) {
-?>
-                    <tr>
-                        <td><?php echo $dato['id_categoria']; ?></td>
-                        <td><?php echo $dato['nombre_categoria']; ?></td>
-                        <td><?php echo $dato['descripcion_categoria']; ?></td>
-                        <td><?php echo $dato['date_added']; ?></td>
-                        <td class='text-right'>
-                        <a href = '#' class='btn btn-success' title='Editar Categoría'data-id_categoria='<?php echo $dato['id_categoria']; ?>' data-nombre_categoria='<?php echo $dato['nombre_categoria']; ?>' data-descripcion_categoria='<?php echo $dato['descripcion_categoria']; ?>' data-date_added='<?php echo $dato['date_added']; ?>'  data-id='<?php echo $dato['id_categoria']; ?>' data-toggle='modal' data-target='#updcategorias'><i class='fa fa-edit'></i></a>
-                        <a href = '#' class='btn btn-danger' title='Borrar Categoría' onclick="eliminar('<?php echo $dato['id_categoria']; ?>')"><i class='fa fa-trash'></i> </a>
-                        </td>
-                    </tr>
-<?php
-    }
-?>    
-                    <tr>
-                        <td colspan = 4 ><span class='pull-right'>
-<?php
-                        echo paginate($reload, $page, $total_pages, $adjacents);
-?>                      </span></td>
-                    </tr>
-            </table>
-        </div>
-<?php        
+    $datos = $categorias->buscar_categoria($con);
+    $tabla = "";
+    while($row = mysqli_fetch_array($datos)){
+        $descripcion_categoria = $row['descripcion_categoria'];//($row['descripcion_categoria']=="") ? " ": $row['descripcion_categoria'];
+        $id_categoria = $row['id_categoria'];
+        $nombre_categoria = $row['nombre_categoria'];
+        $editar = "<a href = '#' class='btn btn-success' title='Editar Categoría'"; 
+        $editar .="data-id_categoria='$id_categoria'"; 
+        $editar .="data-nombre_categoria='$nombre_categoria'"; 
+        $editar .="data-descripcion_categoria='$descripcion_categoria'";  
+        $editar .="data-id='$id_categoria'"; 
+        $editar .="data-toggle='modal'"; 
+        $editar .="data-target='#updcategorias'><i class='fa fa-edit'></i></a>";
+        $eliminar ="<a href = '#' class='btn btn-danger' title='Borrar Categoría' onclick='eliminar(".$id_categoria.")'><i class='fa fa-trash'></i></a>";           
+        $tabla.='{
+                "id_categoria":"'.$row['id_categoria'].'",
+                "nombre_categoria":"'.$row['nombre_categoria'].'",
+                "descripcion_categoria":"'.$row['descripcion_categoria'].'",
+                "date_added":"'.$row['date_added'].'",
+                "acciones":"'.$editar.$eliminar.'"
+                },';		
+    }	
+    $tabla = substr($tabla,0, strlen($tabla) - 1);
+    $datos = '{"data":['.$tabla.']}';
+    echo $datos;
 }
+
+if ($action == "add")
+{
+    $nombre_categoria = mysqli_real_escape_string($con, (strip_tags($_POST['add_nombre_categoria'], ENT_QUOTES)));
+    $descripcion_categoria = mysqli_real_escape_string($con, (strip_tags($_POST['add_descripcion_categoria'], ENT_QUOTES)));
+    $datos = $categorias->insertar_categoria($con,$nombre_categoria,$descripcion_categoria);
+    if ($datos){
+        echo $mensaje->m_correcto('Categoría ha sido ingresada satisfactoriamente.');
+    }else{
+        echo $mensaje->m_error('Lo siento algo ha salido mal intenta nuevamente.'.mysqli_error($con));
+    }
+
+}
+
+if($action == "d")
+{
+    $id = (isset($_REQUEST['id']) && $_REQUEST['id'] != NULL)?$_REQUEST['id']:'';
+    $datos = $categorias->eliminar_categoria($con,$id);
+
+    if ($datos){
+        echo $mensaje->m_correcto('Datos eliminados exitosamente.');
+    }else{
+        echo $mensaje->m_error('Lo siento algo ha salido mal intenta nuevamente.'.mysqli_error($con));
+    }
+}
+                
+if ($action == "upd")
+{
+    $id_categoria = mysqli_real_escape_string($con, (strip_tags($_POST['upd_id'], ENT_QUOTES)));
+    $nombre_categoria = mysqli_real_escape_string($con, (strip_tags($_POST['upd_nombre_categoria'], ENT_QUOTES)));
+    $descripcion_categoria = mysqli_real_escape_string($con, (strip_tags($_POST['upd_descripcion_categoria'], ENT_QUOTES)));
+    
+    $datos = $categorias->actualizar_categoria($con,$id_categoria,$nombre_categoria,$descripcion_categoria);
+    if ($datos){
+        echo $mensaje->m_correcto('Categoría ha sido Actualizada satisfactoriamente.');
+    }else{
+        echo $mensaje->m_error('Lo siento algo ha salido mal intenta nuevamente.'.mysqli_error($con));
+    }
+
+}
+
 ?>
