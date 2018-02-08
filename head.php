@@ -9,17 +9,10 @@
 	</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/ionicons.min.css">
-	<link rel="stylesheet" href="css/AdminLTE.min.css">
+	<link rel="stylesheet" href="css/AdminLTE.css">
 	<link rel="stylesheet" href="css/skins/_all-skins.min.css">
-	<link rel="stylesheet" href="css/morris.css">
-	<link rel="stylesheet" href="css/jquery-jvectormap.css">
-	<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
-	<link rel="stylesheet" href="css/daterangepicker.css">
-	<link rel="stylesheet" href="css/bootstrap3-wysihtml5.min.css">
 	<link rel=icon href='img/logo-icon.png' sizes="32x32" type="image/png">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
    <!--Data table -->
      <!--CSS-->    
     <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">

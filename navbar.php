@@ -21,7 +21,7 @@
             <div class="pull-left">
             <a href = "#" class="btn btn-default btn-flat">Perfil</a></div>
             <div class="pull-right">
-                    <a href = "#" class="btn btn-default btn-flat">Cerrar</a></div></li></ul></li>
+                    <a href = "login.php?logout" class="btn btn-default btn-flat">Cerrar</a></div></li></ul></li>
                     <li><a href = "#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li></ul>
                     </div></nav></header>
 
