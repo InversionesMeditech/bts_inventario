@@ -16,9 +16,7 @@
    <!--Data table -->
      <!--CSS-->    
     <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
- 
-
-	<script>
+ 	<script>
 		( function ( i, s, o, g, r, a, m ) {
 			i[ 'GoogleAnalyticsObject' ] = r;
 			i[ r ] = i[ r ] || function () {

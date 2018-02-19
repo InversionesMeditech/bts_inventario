@@ -6,7 +6,7 @@ function load(){
     $('#table_categorias').DataTable( {
         destroy: true,
 		ajax: {
-			url: "./controller/controller_categoria?action=b",
+			url: "./controller/controller_categoria.php?action=b",
             type: "POST"
 		},					
 		"columns": [
@@ -26,7 +26,7 @@ function eliminar(id){
     if (confirm('¿Realmente deseas eliminar?')){
             $.ajax({
                 type: 'POST',
-                url: './controller/controller_categoria?action=d&id='+id,
+                url: './controller/controller_categoria.php?action=d&id='+id,
                 beforeSend: function(objeto){
                         $('#resultados').html('Mensaje: Cargando...');},
                 success: function(datos){
@@ -37,7 +37,7 @@ $('#guardar_categorias').submit(function( event ) {
     var parametros = $(this).serialize();
     $.ajax({
             type: 'POST',
-            url: './controller/controller_categoria',
+            url: './controller/controller_categoria.php',
             data: parametros,
             beforeSend: function(objeto){
                     $('#resultados_ajax').html('Mensaje: Cargando...');},
@@ -51,7 +51,7 @@ $( '#actualizar_categorias' ).submit(function( event ){
     var parametros = $(this).serialize();
     $.ajax({
             type: 'POST',
-            url: './controller/controller_categoria',
+            url: './controller/controller_categoria.php',
             data: parametros,
             beforeSend: function(objeto){
                 $('#resultados_ajax2').html('Mensaje: Cargando...');},
